@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewContainerRef, ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { DashboardService } from '../dashboard.service';
-import { Router, Route, ActivatedRoute } from '@angular/router';
-import { VcrHostDirective } from 'src/app/shared/directives/vcr-host.directive';
+import { ActivatedRoute } from '@angular/router';
+import { VcrHostDirective } from '../vcr-host.directive';
 
 @Component({
   selector: 'app-dashboard',
