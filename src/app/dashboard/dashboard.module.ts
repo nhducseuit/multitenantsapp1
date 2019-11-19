@@ -7,7 +7,13 @@ import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
 import { ColumnChartComponent } from './charts/column-chart/column-chart.component';
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [
+    DashboardComponent,
+    LineChartComponent,
+    PieChartComponent,
+    BarChartComponent,
+    ColumnChartComponent
+  ],
   imports: [
     CommonModule
   ],
