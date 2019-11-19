@@ -17,13 +17,15 @@ export const TENANT_UIT_DATA = {
 export const TENANT_KMU_DASHBOARD_CONFIG: DashboardConfig = {
   charts: [
     'pie',
-    'line'
+    'line',
+    'bar'
   ]
 };
 
 export const TENANT_UIT_DASHBOARD_CONFIG: DashboardConfig = {
   charts: [
-    'bar'
+    'bar',
+    'column'
   ]
 };
 

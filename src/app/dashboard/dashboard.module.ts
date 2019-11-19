@@ -6,6 +6,8 @@ import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
 import { ColumnChartComponent } from './charts/column-chart/column-chart.component';
 import { VcrHostDirective } from './vcr-host.directive';
+import { DashboardRoutingModule } from './dashboard-routing.module';
+import { DashboardService } from './dashboard.service';
 
 @NgModule({
   declarations: [
@@ -17,13 +19,17 @@ import { VcrHostDirective } from './vcr-host.directive';
     VcrHostDirective
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    DashboardRoutingModule
   ],
   entryComponents: [
     LineChartComponent,
     PieChartComponent,
     BarChartComponent,
     ColumnChartComponent
+  ],
+  providers: [
+    DashboardService
   ]
 })
 export class DashboardModule { }
