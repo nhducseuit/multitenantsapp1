@@ -5,6 +5,7 @@ import { LineChartComponent } from './charts/line-chart/line-chart.component';
 import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
 import { ColumnChartComponent } from './charts/column-chart/column-chart.component';
+import { VcrHostDirective } from './vcr-host.directive';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { ColumnChartComponent } from './charts/column-chart/column-chart.compone
     LineChartComponent,
     PieChartComponent,
     BarChartComponent,
-    ColumnChartComponent
+    ColumnChartComponent,
+    VcrHostDirective
   ],
   imports: [
     CommonModule
