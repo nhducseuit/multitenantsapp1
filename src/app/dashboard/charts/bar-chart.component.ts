@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { TenantAwared } from '../../tenant-awared.interface';
+import { TenantAwared } from 'src/app/shared/interfaces/tenant-awared.interface';
 
 @Component({
   selector: 'app-bar-chart',
-  templateUrl: './bar-chart.component.html',
-  styleUrls: ['./bar-chart.component.scss']
+  template: `
+  <p class="chart">
+    This is a BAR chart of tenant {{ tenantData.name }}
+  </p>
+  `
 })
 export class BarChartComponent implements OnInit, TenantAwared {
   tenantData: any;

@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { LineChartComponent } from './charts/line-chart/line-chart.component';
-import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
-import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
-import { ColumnChartComponent } from './charts/column-chart/column-chart.component';
-import { VcrHostDirective } from './vcr-host.directive';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardService } from './dashboard.service';
+import { SharedModule } from '../shared/shared.module';
+import { SharedMaterialModule } from '../shared-material.module';
+import { LineChartComponent } from './charts/line-chart.component';
+import { PieChartComponent } from './charts/pie-chart.component';
+import { BarChartComponent } from './charts/bar-chart.component';
+import { ColumnChartComponent } from './charts/column-chart.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +16,13 @@ import { DashboardService } from './dashboard.service';
     LineChartComponent,
     PieChartComponent,
     BarChartComponent,
-    ColumnChartComponent,
-    VcrHostDirective
+    ColumnChartComponent
   ],
   imports: [
     CommonModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    SharedModule,
+    SharedMaterialModule
   ],
   entryComponents: [
     LineChartComponent,

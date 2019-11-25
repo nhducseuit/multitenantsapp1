@@ -30,7 +30,11 @@
               "src/styles.scss"
             ],
             "scripts": [],
-            "es5BrowserSupport": true
+            "es5BrowserSupport": true,
+            "lazyModules": [
+              "src/app/toolbars/lite-toolbar/lite-toolbar.module",
+              "src/app/toolbars/advanced-toolbar/advanced-toolbar.module"
+            ]
           },
           "configurations": {
             "production": {

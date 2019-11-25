@@ -1,8 +1,9 @@
 import { Component, OnInit, ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { DashboardService } from '../dashboard.service';
-import { VcrHostDirective } from '../vcr-host.directive';
-import { ChartItem } from '../chart-item.interface';
-import { TenantAwared } from '../tenant-awared.interface';
+import { VcrHostDirective } from 'src/app/shared/directives/vcr-host.directive';
+import { LoadModuleDirective } from 'src/app/shared/directives/load-module.directive';
+import { TenantAwaredItem } from 'src/app/shared/interfaces/tenant-awared-item.interface';
+import { TenantAwared } from 'src/app/shared/interfaces/tenant-awared.interface';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,9 +13,13 @@ import { TenantAwared } from '../tenant-awared.interface';
 export class DashboardComponent implements OnInit {
 
   tenantData: any;
-  chartItems: ChartItem[];
+  chartItems: TenantAwaredItem[];
+  configuredModule: string;
+  toolbarOpened = false;
+  moduleLoaded = false;
 
   @ViewChild(VcrHostDirective, { static: true }) vcrHost: VcrHostDirective;
+  @ViewChild(LoadModuleDirective, {static: false }) moduleLazyLoader: LoadModuleDirective;
 
   constructor(
     private dashboardService: DashboardService,
@@ -25,8 +30,9 @@ export class DashboardComponent implements OnInit {
     this.tenantData = JSON.parse(localStorage.getItem('tenant'));
     const tenantId = this.tenantData.id;
     this.dashboardService.getDashboardConfigForTenant(tenantId).subscribe(tenantConfig => {
-      this.chartItems = this.dashboardService.mapDashboardConfigToItem(tenantConfig, this.tenantData);
+      this.chartItems = this.dashboardService.getConfiguredChartItem(tenantConfig, this.tenantData);
       this.initCharts();
+      this.configuredModule = this.dashboardService.getConfiguredToolbar(tenantConfig);
     });
   }
 
@@ -40,6 +46,15 @@ export class DashboardComponent implements OnInit {
         (chartComponentRef.instance as TenantAwared).tenantData = chartItem.data;
       }
     });
+  }
+
+  openToolbar() {
+    if (!this.moduleLoaded) {
+      this.moduleLazyLoader.loadModule();
+      this.moduleLoaded = true;
+    } else {
+      this.toolbarOpened = !this.toolbarOpened;
+    }
   }
 
 }

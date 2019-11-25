@@ -1,6 +1,6 @@
 import { Type } from '@angular/core';
 
-export interface ChartItem {
+export interface TenantAwaredItem {
   component: Type<any>;
   data: any;
 }

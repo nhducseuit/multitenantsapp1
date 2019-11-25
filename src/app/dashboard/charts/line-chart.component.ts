@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { TenantAwared } from '../../tenant-awared.interface';
+import { TenantAwared } from 'src/app/shared/interfaces/tenant-awared.interface';
 
 @Component({
   selector: 'app-line-chart',
-  templateUrl: './line-chart.component.html',
-  styleUrls: ['./line-chart.component.scss']
+  template: `
+  <p class="chart">
+    This is a LINE chart of tenant {{ tenantData.name }}
+  </p>
+  `
 })
 export class LineChartComponent implements OnInit, TenantAwared {
   tenantData: any;
