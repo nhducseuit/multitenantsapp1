@@ -1,9 +1,9 @@
 import { Component, OnInit, ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { DashboardService } from '../dashboard.service';
-import { VcrHostDirective } from 'src/app/shared/directives/vcr-host.directive';
-import { LoadModuleDirective } from 'src/app/shared/directives/load-module.directive';
-import { TenantAwaredItem } from 'src/app/shared/interfaces/tenant-awared-item.interface';
-import { TenantAwared } from 'src/app/shared/interfaces/tenant-awared.interface';
+import { VcrHostDirective } from '../../shared/directives/vcr-host.directive';
+import { LoadModuleDirective } from '../../shared/directives/load-module.directive';
+import { TenantAwaredItem } from '../../shared/interfaces/tenant-awared-item.interface';
+import { TenantAwared } from '../../shared/interfaces/tenant-awared.interface';
 
 @Component({
   selector: 'app-dashboard',

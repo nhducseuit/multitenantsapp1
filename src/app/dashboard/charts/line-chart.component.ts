@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TenantAwared } from 'src/app/shared/interfaces/tenant-awared.interface';
+import { TenantAwared } from '../../shared/interfaces/tenant-awared.interface';
 
 @Component({
   selector: 'app-line-chart',

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedMaterialModule } from 'src/app/shared-material.module';
+import { SharedMaterialModule } from '../../shared-material.module';
 import { LiteToolbarComponent } from './lite-toolbar.component';
 import { LiteButtonsComponent } from './lite-buttons.component';
 import { LiteTogglersComponent } from './lite-togglers.component';

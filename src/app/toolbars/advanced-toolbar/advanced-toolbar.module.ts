@@ -4,7 +4,7 @@ import { AdvancedToolbarComponent } from './advanced-toolbar.component';
 import { AdvancedTogglersComponent } from './advanced-togglers.component';
 import { AdvancedButtonsComponent } from './advanced-buttons.component';
 import { AdvancedSlidersComponent } from './advanced-sliders.component';
-import { SharedMaterialModule } from 'src/app/shared-material.module';
+import { SharedMaterialModule } from '../../shared-material.module';
 
 @NgModule({
   declarations: [
