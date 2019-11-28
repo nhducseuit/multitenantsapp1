@@ -16,7 +16,6 @@ export class DashboardComponent implements OnInit {
   chartItems: TenantAwaredItem[];
   configuredModule: string;
   toolbarOpened = false;
-  moduleLoaded = false;
 
   @ViewChild(VcrHostDirective, { static: true }) vcrHost: VcrHostDirective;
   @ViewChild(LoadModuleDirective, {static: false }) moduleLazyLoader: LoadModuleDirective;
@@ -49,12 +48,7 @@ export class DashboardComponent implements OnInit {
   }
 
   openToolbar() {
-    if (!this.moduleLoaded) {
-      this.moduleLazyLoader.loadModule();
-      this.moduleLoaded = true;
-    } else {
-      this.toolbarOpened = !this.toolbarOpened;
-    }
+    this.toolbarOpened = !this.toolbarOpened;
   }
 
 }

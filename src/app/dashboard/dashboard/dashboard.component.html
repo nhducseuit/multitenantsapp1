@@ -1,6 +1,6 @@
 <mat-sidenav-container>
   <mat-sidenav #sideNav mode="side" [(opened)]="toolbarOpened">
-    <ng-template [loadModule]="configuredModule" deferredLoading="true" (moduleLoaded)="sideNav.open()"></ng-template>
+    <ng-template [loadModule]="configuredModule"></ng-template>
   </mat-sidenav>
   <mat-sidenav-content>
     <a [routerLink]="['/login']" routerLinkActive="false">Back to LOGIN page</a>

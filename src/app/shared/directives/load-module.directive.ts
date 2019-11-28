@@ -1,5 +1,17 @@
-import { OnInit, OnDestroy, Directive, NgModuleRef, ViewContainerRef, Injector, NgModuleFactoryLoader, Input, Inject, NgModuleFactory, Type, Output, EventEmitter } from '@angular/core';
-import { LAZY_MODULES, LAZY_MODULES_MAP } from './lazy-load-modules.map';
+import {
+  OnInit,
+  OnDestroy,
+  Directive,
+  NgModuleRef,
+  ViewContainerRef,
+  Injector,
+  Input,
+  Inject,
+  NgModuleFactory,
+  Type,
+  Compiler
+} from '@angular/core';
+import { LAZY_MODULES, LAZY_MODULES_MAP } from '../lazy-load-modules.map';
 
 type ModuleWithRoot = Type<any> & { rootComponent: Type<any> };
 
@@ -9,37 +21,48 @@ type ModuleWithRoot = Type<any> & { rootComponent: Type<any> };
 export class LoadModuleDirective implements OnInit, OnDestroy {
 
   @Input('loadModule') moduleName: keyof LAZY_MODULES;
-  @Input() deferredLoading: boolean;
-  @Output() moduleLoaded = new EventEmitter<boolean>();
 
   private moduleRef: NgModuleRef<any>;
 
   constructor(
     private vcr: ViewContainerRef,
     private injector: Injector,
-    private loader: NgModuleFactoryLoader,
+    private compiler: Compiler,
     @Inject(LAZY_MODULES_MAP) private modulesMap
   ) { }
 
-  ngOnInit(): void {
-    if (!this.deferredLoading) {
-      this.loadModule();
+  async ngOnInit() {
+    if (this.moduleRef) {
+      this.moduleRef.destroy();
+    }
+    const moduleFactory = await this.loadModuleFactory(this.modulesMap[this.moduleName]);
+    if (moduleFactory) {
+      // Set lazily loaded module to current Injector
+      this.moduleRef = moduleFactory.create(this.injector);
+
+      // Continue creating root component and append it to current ViewContainerRef
+      const rootComponent = (moduleFactory.moduleType as ModuleWithRoot).rootComponent;
+      const componentFactory = this.moduleRef.componentFactoryResolver.resolveComponentFactory(rootComponent);
+      const componentRef = this.vcr.createComponent(componentFactory);
+      // Trigger change detection to update view for newly created component
+      componentRef.changeDetectorRef.detectChanges();
     }
   }
 
-  public loadModule() {
-    this.loader
-      .load(this.modulesMap[this.moduleName])
-      .then((factory: NgModuleFactory<any>) => {
-        this.moduleRef = factory.create(this.injector);
-        const rootComponent = (factory.moduleType as ModuleWithRoot).rootComponent;
-        const componentRef = this.moduleRef.componentFactoryResolver.resolveComponentFactory(rootComponent);
-        this.vcr.createComponent(componentRef);
-        this.moduleLoaded.emit(true);
-      });
+  public async loadModuleFactory(lazyloadCallback: () => Promise<any>): Promise<NgModuleFactory<any>> {
+    const m = await lazyloadCallback();
+    if (m instanceof NgModuleFactory) {
+      // In case of AOT
+      return m;
+    } else {
+      // In case of JIT
+      return this.compiler.compileModuleAsync(m);
+    }
   }
 
   ngOnDestroy(): void {
-    this.moduleRef && this.moduleRef.destroy();
+    if (this.moduleRef) {
+      this.moduleRef.destroy();
+    }
   }
 }
