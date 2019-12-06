@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardService } from './dashboard.service';
 import { SharedModule } from '../shared/shared.module';
-import { SharedMaterialModule } from '../shared-material.module';
 import { LineChartComponent } from './charts/line-chart.component';
 import { PieChartComponent } from './charts/pie-chart.component';
 import { BarChartComponent } from './charts/bar-chart.component';
@@ -19,10 +18,8 @@ import { DashboardComponent } from './dashboard.component';
     ColumnChartComponent
   ],
   imports: [
-    CommonModule,
     DashboardRoutingModule,
-    SharedModule,
-    SharedMaterialModule
+    SharedModule
   ],
   entryComponents: [
     LineChartComponent,

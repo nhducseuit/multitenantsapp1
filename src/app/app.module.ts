@@ -1,13 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, SystemJsNgModuleLoader, NgModuleFactoryLoader } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { MatButtonModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
-import { DashboardModule } from './dashboard/dashboard.module';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -18,8 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    DashboardModule,
-    MatButtonModule,
+    MatButtonModule
   ],
   bootstrap: [AppComponent]
 })

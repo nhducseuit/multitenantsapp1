@@ -5,6 +5,7 @@ import { LoadModuleDirective } from '../shared/directives/load-module.directive'
 import { TenantAwaredItem } from '../shared/interfaces/tenant-awared-item.interface';
 import { TenantAwared } from '../shared/interfaces/tenant-awared.interface';
 import { Router } from '@angular/router';
+import { TenantConfigService } from '../tenant-config.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -49,13 +50,14 @@ export class DashboardComponent implements OnInit {
   @ViewChild(LoadModuleDirective, {static: false }) moduleLazyLoader: LoadModuleDirective;
 
   constructor(
-    private dashboardService: DashboardService,
-    private cfr: ComponentFactoryResolver,
     private router: Router,
+    private cfr: ComponentFactoryResolver,
+    private dashboardService: DashboardService,
+    private tenantConfigService: TenantConfigService
   ) { }
 
   ngOnInit() {
-    this.tenantConfig = JSON.parse(localStorage.getItem('tenant'));
+    this.tenantConfig = this.tenantConfigService.loadTenantConfig();
     const tenantId = this.tenantConfig.id;
     this.dashboardService.getDashboardConfigForTenant(tenantId).subscribe(tenantConfig => {
       this.chartItems = this.dashboardService.getConfiguredChartItem(tenantConfig, this.tenantConfig);

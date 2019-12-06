@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { SharedMaterialModule } from '../../shared-material.module';
 import { LiteToolbarComponent } from './lite-toolbar.component';
 import { LiteButtonsComponent } from './lite-buttons.component';
 import { LiteTogglersComponent } from './lite-togglers.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -14,8 +13,7 @@ import { LiteTogglersComponent } from './lite-togglers.component';
     LiteTogglersComponent
   ],
   imports: [
-    CommonModule,
-    SharedMaterialModule
+    SharedModule
   ],
   entryComponents: [LiteToolbarModule.rootComponent]
 })

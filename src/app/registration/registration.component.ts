@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { RegistrationService } from './registration.service';
 import { TenantAwaredItem } from '../shared/interfaces/tenant-awared-item.interface';
 import { Router } from '@angular/router';
+import { TenantConfigService } from '../tenant-config.service';
 
 @Component({
   selector: 'app-registration',
@@ -43,12 +44,13 @@ export class RegistrationComponent implements OnInit {
   formInputItems: TenantAwaredItem[];
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
     private registrationService: RegistrationService,
-    private router: Router) { }
+    private tenantConfigService: TenantConfigService) { }
 
   ngOnInit() {
-    this.tenantData = JSON.parse(localStorage.getItem('tenant'));
+    this.tenantData = this.tenantConfigService.loadTenantConfig();
     const tenantId = this.tenantData.id;
     this.registrationService.getRegistrationFormConfig(tenantId).then(configs => {
       this.formInputItems = this.registrationService.getConfiguredFormInputs(configs);

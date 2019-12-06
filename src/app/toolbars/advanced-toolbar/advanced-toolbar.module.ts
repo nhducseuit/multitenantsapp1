@@ -1,10 +1,9 @@
 import { NgModule, Type } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { AdvancedToolbarComponent } from './advanced-toolbar.component';
 import { AdvancedTogglersComponent } from './advanced-togglers.component';
 import { AdvancedButtonsComponent } from './advanced-buttons.component';
 import { AdvancedSlidersComponent } from './advanced-sliders.component';
-import { SharedMaterialModule } from '../../shared-material.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -14,8 +13,7 @@ import { SharedMaterialModule } from '../../shared-material.module';
     AdvancedSlidersComponent
   ],
   imports: [
-    CommonModule,
-    SharedMaterialModule
+    SharedModule
   ],
   entryComponents: [
     AdvancedToolbarModule.rootComponent

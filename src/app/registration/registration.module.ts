@@ -13,15 +13,23 @@ import { FormInputDirective } from './form-input.directive';
 
 
 @NgModule({
-  declarations: [RegistrationComponent, InputComponent, SelectComponent, FormInputDirective],
+  declarations: [
+    RegistrationComponent,
+    InputComponent,
+    SelectComponent,
+    FormInputDirective
+  ],
   imports: [
-    CommonModule,
     RegistrationRoutingModule,
     SharedModule,
-    SharedMaterialModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
-  providers: [RegistrationService],
-  entryComponents: [InputComponent, SelectComponent]
+  providers: [
+    RegistrationService
+  ],
+  entryComponents: [
+    InputComponent,
+    SelectComponent
+  ]
 })
 export class RegistrationModule { }

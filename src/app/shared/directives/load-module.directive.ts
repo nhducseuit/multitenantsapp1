@@ -11,7 +11,7 @@ import {
   Type,
   Compiler
 } from '@angular/core';
-import { LazyModules, LAZY_MODULES_MAP } from '../lazy-load-modules.map';
+import { LazyModules, LAZY_MODULES_MAP } from './lazy-load-modules.map';
 
 type ModuleWithRoot = Type<any> & { rootComponent: Type<any> };
 
@@ -35,17 +35,19 @@ export class LoadModuleDirective implements OnInit, OnDestroy {
     if (this.moduleRef) {
       this.moduleRef.destroy();
     }
-    const moduleFactory = await this.loadModuleFactory(this.modulesMap[this.moduleName]);
-    if (moduleFactory) {
-      // Set lazily loaded module to current Injector
-      this.moduleRef = moduleFactory.create(this.injector);
+    if (this.moduleName) {
+      const moduleFactory = await this.loadModuleFactory(this.modulesMap[this.moduleName]);
+      if (moduleFactory) {
+        // Set lazily loaded module to current Injector
+        this.moduleRef = moduleFactory.create(this.injector);
 
-      // Continue creating root component and append it to current ViewContainerRef
-      const rootComponent = (moduleFactory.moduleType as ModuleWithRoot).rootComponent;
-      const componentFactory = this.moduleRef.componentFactoryResolver.resolveComponentFactory(rootComponent);
-      const componentRef = this.vcr.createComponent(componentFactory);
-      // Trigger change detection to update view for newly created component
-      componentRef.changeDetectorRef.detectChanges();
+        // Continue creating root component and append it to current ViewContainerRef
+        const rootComponent = (moduleFactory.moduleType as ModuleWithRoot).rootComponent;
+        const componentFactory = this.moduleRef.componentFactoryResolver.resolveComponentFactory(rootComponent);
+        const componentRef = this.vcr.createComponent(componentFactory);
+        // Trigger change detection to update view for newly created component
+        componentRef.changeDetectorRef.detectChanges();
+      }
     }
   }
 
