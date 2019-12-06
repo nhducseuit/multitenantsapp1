@@ -9,9 +9,10 @@ export interface LazyModules {
   advancedToolbar: LazyLoadedModule<NgModuleFactory<LiteToolbarModule> | AdvancedToolbarModule>;
 }
 
+// Convert to relative path to be able to work on stackblitz.com
 export const lazyMap: LazyModules = {
-  liteToolbar: () => import('src/app/toolbars/lite-toolbar/lite-toolbar.module').then(m => m.LiteToolbarModule),
-  advancedToolbar: () => import('src/app/toolbars/advanced-toolbar/advanced-toolbar.module').then(m => m.AdvancedToolbarModule)
+  liteToolbar: () => import('../toolbars/lite-toolbar/lite-toolbar.module').then(m => m.LiteToolbarModule),
+  advancedToolbar: () => import('../toolbars/advanced-toolbar/advanced-toolbar.module').then(m => m.AdvancedToolbarModule)
 };
 
 export const LAZY_MODULES_MAP = new InjectionToken('LAZY_MODULES_MAP', {
