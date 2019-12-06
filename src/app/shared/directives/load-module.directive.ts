@@ -11,7 +11,7 @@ import {
   Type,
   Compiler
 } from '@angular/core';
-import { LAZY_MODULES, LAZY_MODULES_MAP } from '../lazy-load-modules.map';
+import { LazyModules, LAZY_MODULES_MAP } from '../lazy-load-modules.map';
 
 type ModuleWithRoot = Type<any> & { rootComponent: Type<any> };
 
@@ -20,7 +20,7 @@ type ModuleWithRoot = Type<any> & { rootComponent: Type<any> };
 })
 export class LoadModuleDirective implements OnInit, OnDestroy {
 
-  @Input('loadModule') moduleName: keyof LAZY_MODULES;
+  @Input('loadModule') moduleName: keyof LazyModules;
 
   private moduleRef: NgModuleRef<any>;
 

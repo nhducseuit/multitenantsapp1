@@ -5,12 +5,12 @@ import { TenantAwared } from '../../shared/interfaces/tenant-awared.interface';
   selector: 'app-column-chart',
   template: `
   <p class="chart">
-    This is a COLUMN chart of tenant {{ tenantData.name }}
+    This is a COLUMN chart of tenant {{ config.name }}
   </p>
   `
 })
 export class ColumnChartComponent implements OnInit, TenantAwared {
-  tenantData: any;
+  config: any;
 
   constructor() { }
 

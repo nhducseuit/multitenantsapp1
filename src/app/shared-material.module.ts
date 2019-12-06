@@ -9,7 +9,9 @@ import {
   MatSlideToggleModule,
   MatIconModule,
   MatExpansionModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatInputModule,
+  MatDividerModule
 } from '@angular/material';
 
 @NgModule({
@@ -23,7 +25,9 @@ import {
     MatIconModule,
     MatExpansionModule,
     MatSidenavModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatInputModule,
+    MatDividerModule
   ],
   exports: [
     MatButtonModule,
@@ -35,7 +39,9 @@ import {
     MatIconModule,
     MatExpansionModule,
     MatSidenavModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatInputModule,
+    MatDividerModule
   ]
 })
 export class SharedMaterialModule { }

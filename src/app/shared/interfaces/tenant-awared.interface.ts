@@ -1,3 +1,3 @@
 export interface TenantAwared {
-  tenantData: any;
+  config: any;
 }

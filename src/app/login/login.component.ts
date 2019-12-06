@@ -31,4 +31,20 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['dashboard']);
   }
 
+  loginToKMUForm() {
+    localStorage.setItem('tenant', JSON.stringify({
+      id: 'kmu',
+      name: 'KMU'
+    }));
+    this.router.navigate(['registration']);
+  }
+
+  loginToUITForm() {
+    localStorage.setItem('tenant', JSON.stringify({
+      id: 'uit',
+      name: 'UIT'
+    }));
+    this.router.navigate(['registration']);
+  }
+
 }

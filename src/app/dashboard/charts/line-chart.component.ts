@@ -5,12 +5,12 @@ import { TenantAwared } from '../../shared/interfaces/tenant-awared.interface';
   selector: 'app-line-chart',
   template: `
   <p class="chart">
-    This is a LINE chart of tenant {{ tenantData.name }}
+    This is a LINE chart of tenant {{ config.name }}
   </p>
   `
 })
 export class LineChartComponent implements OnInit, TenantAwared {
-  tenantData: any;
+  config: any;
 
   constructor() { }
 

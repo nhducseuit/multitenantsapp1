@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { TenantAwaredItem } from '../shared/interfaces/tenant-awared-item.interface';
-import { DashboardConfig, Charts, DASHBOARD_TYPE_NAME_MAPPING, DASHBOARD_TOOLBAR_TYPE_NAME_MAPPING } from './dashboard-config';
+import { DashboardConfig, Charts, DASHBOARD_TYPE_NAME_MAPPING, DASHBOARD_TOOLBAR_TYPE_NAME_MAPPING } from './dashboard-config.interface';
 
 export const TENANT_KMU_DATA = {
   id: 'kmu',

@@ -21,9 +21,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DashboardModule,
     MatButtonModule,
   ],
-  providers: [
-    { provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader }
-  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

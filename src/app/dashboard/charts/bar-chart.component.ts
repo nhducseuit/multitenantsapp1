@@ -5,12 +5,12 @@ import { TenantAwared } from './../../shared/interfaces/tenant-awared.interface'
   selector: 'app-bar-chart',
   template: `
   <p class="chart">
-    This is a BAR chart of tenant {{ tenantData.name }}
+    This is a BAR chart of tenant {{ config.name }}
   </p>
   `
 })
 export class BarChartComponent implements OnInit, TenantAwared {
-  tenantData: any;
+  config: any;
 
   constructor() { }
 

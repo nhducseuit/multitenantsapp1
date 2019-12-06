@@ -1,16 +1,7 @@
 import { Injectable } from '@angular/core';
-
-export type InputTypes = 'input' | 'select';
-export type ValidatorNames = 'required' | 'number' | 'currency' | 'phonenumber';
-
-export interface InputConfig {
-  inputType: InputTypes;
-  formControlName: string;
-  placeholder: string;
-  validators: ValidatorNames[];
-  password?: boolean;
-  options?: string[];
-}
+import { InputConfig } from './input-config.interface';
+import { TenantAwaredItem } from '../shared/interfaces/tenant-awared-item.interface';
+import { INPUT_TYPE_TO_COMPONENT_MAPPINGS, VALIDATOR_NAME_TO_INSTANCE_MAPPINGS } from './input-config.mapping';
 
 const KMU_REGISTRATION_FORM_CONFIG: InputConfig[] = [
   {
@@ -18,7 +9,10 @@ const KMU_REGISTRATION_FORM_CONFIG: InputConfig[] = [
     formControlName: 'username',
     placeholder: 'User name',
     validators: [
-      'required'
+      {
+        validatorName: 'required',
+        errorName: 'required'
+      }
     ]
   },
   {
@@ -27,7 +21,10 @@ const KMU_REGISTRATION_FORM_CONFIG: InputConfig[] = [
     placeholder: 'Password',
     password: true,
     validators: [
-      'required'
+      {
+        validatorName: 'required',
+        errorName: 'required'
+      }
     ]
   },
   {
@@ -35,7 +32,10 @@ const KMU_REGISTRATION_FORM_CONFIG: InputConfig[] = [
     formControlName: 'gender',
     placeholder: 'Gender',
     validators: [
-      'required'
+      {
+        validatorName: 'required',
+        errorName: 'required'
+      }
     ],
     options: [
       'male',
@@ -51,7 +51,10 @@ const UIT_REGISTRATION_FORM_CONFIG: InputConfig[] = [
     formControlName: 'class',
     placeholder: 'Class',
     validators: [
-      'required'
+      {
+        validatorName: 'required',
+        errorName: 'required'
+      }
     ],
     options: [
       'K1',
@@ -61,10 +64,17 @@ const UIT_REGISTRATION_FORM_CONFIG: InputConfig[] = [
   },
   {
     inputType: 'input',
-    formControlName: 'phoneNumber',
-    placeholder: 'Phone Number',
+    formControlName: 'email',
+    placeholder: 'Email',
     validators: [
-      'required', 'phonenumber'
+      {
+        validatorName: 'required',
+        errorName: 'required'
+      },
+      {
+        validatorName: 'email',
+        errorName: 'email'
+      }
     ]
   },
   {
@@ -73,16 +83,53 @@ const UIT_REGISTRATION_FORM_CONFIG: InputConfig[] = [
     placeholder: 'Password',
     password: true,
     validators: [
-      'required'
+      {
+        validatorName: 'required',
+        errorName: 'required'
+      }
+    ]
+  },
+  {
+    inputType: 'input',
+    formControlName: 'phoneNumber',
+    placeholder: 'Phone Number',
+    validators: [
+      {
+        validatorName: 'required',
+        errorName: 'required'
+      },
+      {
+        validatorName: 'regex',
+        errorName: 'pattern',
+        parameters: {
+          pattern: '^0(1\\d{9}|9\\d{8})$'
+        }
+      }
     ]
   }
-]
+];
 
 @Injectable()
 export class RegistrationService {
 
-  public getRegistrationFormConfig(tenantId: string) {
-    return tenantId === 'uit' ? UIT_REGISTRATION_FORM_CONFIG : KMU_REGISTRATION_FORM_CONFIG;
+  public getRegistrationFormConfig(tenantId: string): Promise<InputConfig[]> {
+    return tenantId === 'uit' ? Promise.resolve(UIT_REGISTRATION_FORM_CONFIG) : Promise.resolve(KMU_REGISTRATION_FORM_CONFIG);
+  }
+
+  public getConfiguredFormInputs(inputConfigs: InputConfig[]): TenantAwaredItem[] {
+    return inputConfigs
+    .map(config => {
+      config.validators.forEach(validator => {
+        validator.validatorFn = VALIDATOR_NAME_TO_INSTANCE_MAPPINGS(validator.validatorName, validator.parameters);
+      });
+      return config;
+    })
+    .map(config => {
+      return {
+        component: INPUT_TYPE_TO_COMPONENT_MAPPINGS[config.inputType],
+        data: config
+      };
+    });
   }
 
 }
