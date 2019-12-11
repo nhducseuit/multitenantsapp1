@@ -33,7 +33,6 @@ export class FormInputDirective implements OnInit {
       const chartComponentRef = this.vcr.createComponent(chartComponent);
       (chartComponentRef.instance as TenantAwaredInput).config = this.item.data;
       (chartComponentRef.instance as TenantAwaredInput).formGroup = this.formGroup;
-      chartComponentRef.changeDetectorRef.detectChanges();
     }
   }
 }

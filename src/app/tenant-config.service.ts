@@ -11,6 +11,6 @@ export class TenantConfigService {
   }
 
   loadTenantConfig() {
-    return localStorage.getItem(this.TENANT_CONF_KEY);
+    return JSON.parse(localStorage.getItem(this.TENANT_CONF_KEY));
   }
 }
